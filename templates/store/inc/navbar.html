@@ -1,0 +1,194 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/barbarshop.jpg'%}" /></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="search-bar">
+            <form action="{% url 'searchproduct' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="search" required class="form-control" name="productsearch" id="searchproducts" placeholder="Search Products">
+                    <button type="submit" class="input-group-text"> <i class="fa fa-search"> </i> </span>
+          </div>
+        </form>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'collections' %}active{% endif %}" href="{% url 'collections' %}">Shops</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}" aria-current="page" href="{% url 'cart' %}">Bookings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}" aria-current="page" href="{% url 'wishlist' %}">Wishlist</a>
+          </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ request.user }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'myorders' %}">My Orders</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+              </ul>
+            </li>
+          
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'loginpage' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+          <style>
+            @import url(https://fonts.googleapis.com/css?family=Lato:400,400italic,700|Sansita+One);
+            :root {
+            --primary-color: #302AE6;
+            --secondary-color: #536390;
+            --font-color: #424242;
+            --bg-color: #fff;
+            --heading-color: #292922;
+          }
+          [data-theme=dark] {
+            --primary-color: #9A97F3;
+            --secondary-color: #818cab;
+            --font-color: #e1e1ff;
+            --bg-color: #161625;
+            --heading-color: #818cab;
+          }
+          
+          body {
+            font-family: "Lato", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--font-color);
+            max-width: 90%;
+            margin: 0 auto;
+            font-size: calc(1rem + 0.25vh);
+          }
+
+          h1 {
+            color: var(--heading-color);
+            font-family: "Sansita One", serif;
+            font-size: 2rem;
+            margin-bottom: 1vh;
+          }
+
+          p {
+            font-size: 1.1rem;
+            line-height: 1.6rem;
+          }
+          
+          a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+          }
+          a:hover, a:focus {
+            border-bottom: 3px solid currentColor;
+          }
+          
+          section {
+            max-width: 68%;
+            margin: 0 auto;
+          }
+          
+          .post-meta {
+            font-size: 1rem;
+            font-style: italic;
+            display: block;
+            margin-bottom: 4vh;
+            color: var(--secondary-color);
+          }
+          
+          nav {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px 0;
+          }
+          
+          /*slider switch css */
+          .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+          }
+          .theme-switch-wrapper em {
+            margin-left: 10px;
+            font-size: 1rem;
+          }
+          
+          .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+          }
+          
+          .theme-switch input {
+            display: none;
+          }
+          
+          .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: 0.4s;
+          }
+          
+          .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: 0.4s;
+            width: 26px;
+          }
+          
+          input:checked + .slider {
+            background-color: #66bb6a;
+          }
+          
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
+          
+          .slider.round {
+            border-radius: 34px;
+          }
+          
+          .slider.round:before {
+            border-radius: 50%;
+          }
+          </style>
+          <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+          </label>
+          <link rel="stylesheet" href="style1.css">
+          <script src="java1.js"></script>
+            <em>Enable Dark Mode!</em>
+          </div>
+          
+
+        </ul>
+      </div>
+    </div>
+</nav>
